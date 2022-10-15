@@ -1,0 +1,58 @@
+.background{
+    background: url(https://www.pixelstalk.net/wp-content/uploads/2016/04/Stars-wallpaper-HD-desktop.jpg) no-repeat;
+    height: 49rem;
+    padding: 5rem;
+}
+
+.detailsContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+   
+   
+}
+
+.col{
+    max-width: 600px;
+    margin: 40px;
+    height: auto;
+    height: 80%;
+    
+}
+
+.countryImage{
+    border-radius: 15px;
+}
+
+.countryDetails{
+    font-size: 1.0rem;
+    text-align: justify;
+}
+
+.firstItem{
+    margin-top: 0;
+}
+
+.actContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 60px);
+    gap: 40px;
+
+
+}
+
+.activities{
+    border: 2px solid #7267bc;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+@media (max-width: 560px){
+    .countryImage{
+        width: 90%;
+        height: auto;
+    }
+}

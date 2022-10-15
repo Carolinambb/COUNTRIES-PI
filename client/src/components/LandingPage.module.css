@@ -1,0 +1,40 @@
+.landing{
+    background:url(https://www.utm.my/insteg/files/2018/01/4k-space-background.jpg);
+    
+    background-position: center;
+    background-size: cover;
+    height: 57rem;
+    padding: 5rem;
+    background-repeat: no-repeat;
+
+
+}
+
+/* .center{
+
+    justify-content: center;
+    align-items: center;
+} */
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+
+
+.title_landing{
+    font-family: 'Liberty';
+        font-weight: 100;
+        font-size: 7rem;
+       
+        flex-flow: row;
+        color: #000000;
+        text-shadow: 0 0 2rem #c020dd;
+        display: inline-block;
+
+}
+
