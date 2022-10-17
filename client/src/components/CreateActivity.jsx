@@ -6,24 +6,33 @@ import { useHistory } from 'react-router'
 import styles from './CreateActivity.module.css'
 import styles1 from './Button.module.css'
 
-// function validate(input) {
-//     if(!input.name){
-//         alert("Se requiere un nombre") 
-//     }else if(!input.difficulty){
-//         alert ("Se requiere poner una dificultad")
-//     }else if(!input.duration){
-//        alert ("Poner hora o dias (ej: 9 horas)")
-//     }else if(!input.season){
-//        alert ("Se requiere una temporada")
-//     }else if(input.countries.length < 0){
-//        alert ("Selecciona los paises en donde creaste tu actividad")
-//     }
-// }
+function validate(input) {
+    let errors = {}
+
+    if(!input.name){
+        errors.name = ("Se requiere un nombre") }
+       else if(input.name.length > 40){
+        errors.name = ("El nombre es muy largo")        
+     } else if(!input.difficulty){
+        errors.difficulty = ("Se requiere poner una dificultad")
+    }else if(!input.duration){
+        errors.duration =("Se requiere duracion") 
+     }else if(input.duration  > 24 || input.duration < 1)
+     errors.duration = ("La duracion debe ser entre 1hs y 24hs")
+     
+     else if(!input.season){
+        errors.season = ("Se requiere una temporada")
+    }else if(input.countries.length === 0){
+        errors.countries = ("Se requiere al menos un país")
+    }
+    return errors
+}
+
 
 export default function CreateActivity() {
     const dispatch = useDispatch()
 
-    const history = useHistory()
+    const history = useHistory() //o navigate
 
     const countries = useSelector((state) => state.countries)
 
@@ -36,6 +45,13 @@ export default function CreateActivity() {
         season:'',
         countries: []
     })
+
+
+    useEffect(() => {
+        dispatch(getCountries('ASC')) //fijarse eso
+    }, [dispatch])
+    
+    console.log(input)
 
     //const [buttonActivated, setButtonActivated] = useState(false)
 
@@ -50,14 +66,16 @@ export default function CreateActivity() {
 
     function handleChange(e){
         // Le agregamos el e.target.value (lo que vamos modificando) al input actual 
-        setInput({
-            ...input, 
-            [e.target.name] : e.target.value
+
+        e.preventDefault();
+        setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        setErrors(validate({
+          ...input,
+          [e.target.name]: [e.target.value]
         })
-        // setErrors(validate({
-        //     ...input, 
-        //     [e.target.name] : e.target.value
-        // }))
+        )
+    
+
     }
 
     function handleCheck(e){
@@ -67,10 +85,10 @@ export default function CreateActivity() {
                 [e.target.name] : e.target.value
             })
         }
-        // setErrors(validate({
-        //     ...input, 
-        //     [e.target.name] : e.target.value
-        // }))
+         setErrors(validate({
+             ...input, 
+             [e.target.name] : e.target.value
+         }))
     }
 
     function handleSelect(e){
@@ -79,10 +97,10 @@ export default function CreateActivity() {
             // Concateno lo que ya habia en el array, con el nuevo value
             countries: [...input.countries, e.target.value]
         })
-        // setErrors(validate({
-        //     ...input, 
-        //     [e.target.name] : e.target.value
-        // }))
+         setErrors(validate({
+            ...input, 
+            [e.target.name] : e.target.value
+         }))
     }
 
     function handleSubmit(e){
@@ -104,10 +122,10 @@ export default function CreateActivity() {
                 countries: []
             })
         }
-        // setErrors(validate({
-        //     ...input, 
-        //     [e.target.name] : e.target.value
-        // }))    
+         setErrors(validate({
+             ...input, 
+            [e.target.name] : e.target.value
+         }))    
     }
 
     function handleDelete(e){
@@ -118,11 +136,7 @@ export default function CreateActivity() {
         })
     }
 
-    useEffect(() => {
-        dispatch(getCountries('ASC'))
-    }, [dispatch])
-    
-    console.log(input)
+   
 
     // if(input.name && input.difficulty && input.duration && input.season && input.countries){
     //     setButtonActivated(true)
@@ -138,11 +152,15 @@ export default function CreateActivity() {
             <h1 className={styles.title}>Crear actividad</h1>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.justify}>
                 <div >
+
+
                 <div className={styles.container}>
                     <label className={styles.label}>Nombre: </label>
                     <input type="text" value={input.name} name='name' onChange={handleChange} className={styles.input}/>
                     {errors.name && (<p>{errors.name}</p>)}
                 </div>
+
+
                 <div className={styles.container}>
                     <label className={styles.label}>Dificultad: </label>
                     <label>
@@ -163,7 +181,7 @@ export default function CreateActivity() {
                 </div>
                 <div className={styles.container}>
                     <label className={styles.label}>Duracion: </label>
-                    <input type="text" value={input.duration} name='duration' onChange={handleChange} className={styles.input}/>
+                    <input type="number" min="" max="24"  value={input.duration} name='duration' onChange={handleChange} className={styles.input}/>
                     {errors.duration && (<p>{errors.duration}</p>)}
                 </div>
                 <div className={styles.container}>
@@ -187,8 +205,9 @@ export default function CreateActivity() {
                     <label className={styles.label}>Pais donde se realiza: </label>
                     <div >
                     <select onChange={(e) => handleSelect(e)} className={styles1.select}>
+                    <option>Seleccionar pais</option>
                     {countries.map((country) => (
-                        <option value={country.name}>{country.name}</option>
+                        <option value={country.name} key={country.id}>{country.name}</option>
                     ))}
                     </select>
                     </div>
