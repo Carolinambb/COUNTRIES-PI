@@ -10,7 +10,7 @@ function LandingPage(){
             <Link to='/home'>
                 <div className={styles.center}>
 
-                    <button className={styles1.btn_landing}><span class="text">Ingresar</span></button>
+                    <button className={styles1.btn_landing}><span >Ingresar</span></button>
                     
                 </div>
             </Link>

@@ -36,6 +36,7 @@ const CountryDetail = () => {
              <p><strong>Subregión:</strong> {country.subregion}</p>
              <p><strong>Área:</strong> {country.area} km2</p>
              <p><strong>Población:</strong> {country.population} habitantes</p>
+             
              <div className={styles.activities}>
              <div className={styles.actContainer}>
              {country.activities && country.activities.map((activity) => 

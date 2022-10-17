@@ -63,6 +63,17 @@ function rootReducer(state = initialState, action){
                 ...state,
                 countries: activitiesFilter
             }     
+
+            case "ORDER_BY_POPULATION":
+                let orderPopulation = action.payload === 'high' ?
+                state.countries.sort((a,b)=> a.population < b.population ? 1 : -1)
+                :
+                state.countries.sort((a,b)=> a.population < b.population ? -1 : 1)
+                console.log(state.countries)
+                return{
+                    ...state,
+                    countries: orderPopulation
+                }  
         default :
         return state;    
     }

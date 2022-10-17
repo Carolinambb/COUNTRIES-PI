@@ -48,7 +48,7 @@ router.get('/countries', async (req,res) => {
     // Guardo el name pasado por query
     const queryName = req.query.name
 
-    const queryOrder = req.query.order
+    const queryOrder = req.query.order //esto rariii
 
     try{
         // Si la db esta llena no se hace nada
@@ -107,6 +107,34 @@ router.get('/countries', async (req,res) => {
 
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////
 router.get('/countries/:id', async (req,res) => {
     // Obtener el detalle de un país en particular
     // Debe traer solo los datos pedidos en la ruta de detalle de país
@@ -123,6 +151,9 @@ router.get('/countries/:id', async (req,res) => {
     res.status(200).send(countryById)
 })
 
+
+
+
 router.get('/activity', async (req,res) => {
     try {
         let activities = await Activity.findAll()
@@ -131,6 +162,9 @@ router.get('/activity', async (req,res) => {
         res.status(500).send('Error')
     }
 })
+
+
+
 
 router.post('/activity', async (req,res) => {
     try{

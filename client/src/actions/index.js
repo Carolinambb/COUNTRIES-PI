@@ -17,10 +17,10 @@ import axios from 'axios'
 // }
 
 // Conexion con el backend
-export function getCountries(order){
+export function getCountries(order){ //rariii
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/api/countries?order=' + order);
-        const data = json.data
+       const data = json.data
         //const {currentCountries, totalPages} = paginado(data)
         return dispatch({
             type: 'GET_COUNTRIES',
@@ -29,6 +29,23 @@ export function getCountries(order){
         })
     }
 }
+
+/*export function getCountries(){
+    return async function(dispatch){
+        try {
+            var json = await axios.get('http://localhost:3001/countries')
+            console.log(json)
+       return dispatch({
+        type: "GET_COUNTRIES",
+        payload: json.data
+       })
+       
+        } catch (error) {
+            alert(error)
+        }
+    }
+}*/ 
+
 
 export const getCountry = (id) => dispatch => {
     return fetch ("http://localhost:3001/api/countries/" + id)
@@ -76,7 +93,7 @@ export function orderName(payload){
         type: 'ORDER_BY_NAME',
         payload
     }
-}
+} //problemas
 
 export function filterByContinent(payload){
     return {
@@ -91,6 +108,13 @@ export function filterByActivity(payload){
         payload
     }
 }
+
+export function orderPopulation(payload){
+    return{
+        type: "ORDER_BY_POPULATION",
+        payload
+    }
+} //problemas
 
 export const GET_COUNTRIES = 'GET_COUNTRIES';
 export const GET_COUNTRY = 'GET_COUNTRY';

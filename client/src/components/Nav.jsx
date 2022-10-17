@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getByName } from "../actions";
 import styles from './Nav.module.css'
 
+
 export default function Nav() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -47,3 +48,40 @@ export default function Nav() {
     </form>
   );
 }
+
+
+
+
+//busqueda 
+
+/*export default function Nav({setCurrentPage}){
+    const dispatch = useDispatch()
+    const [name, setName] = useState('')
+
+    function handleInputChange(e){
+        e.preventDefault()
+        setName(e.target.value)
+    }
+    function handleSubmit(e){
+        e.preventDefault()
+        dispatch(getByName(name))
+        setName('')
+        setCurrentPage(1)
+    }
+    return(
+        <div >
+            <input 
+                
+                type='text'
+                value={name}
+                onChange={(e) => handleInputChange(e)}
+                placeholder='Search country...'/>
+        
+            <input 
+                
+                type='submit'
+                value='Search' 
+                onClick={(e) => handleSubmit(e)}/>
+        </div>
+    )
+}*/

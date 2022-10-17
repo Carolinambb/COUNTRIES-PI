@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
-import {getCountries, filterByContinent, filterByActivity, getActivities, orderName}  from '../actions'
+import {getCountries, filterByContinent, filterByActivity, getActivities, orderPopulation, orderName}  from '../actions'
 import {Link} from 'react-router-dom'
 import CountryCard from './CountryCard'
 import Paginado from "./Paginado"
@@ -75,15 +75,17 @@ function Home(){
     //     return <div>Cargando...</div>
     // }
 
-    // const handleClick = (event) => {
-    //     event.preventDefault();
-    //     dispatch(getCountries(order))
-    // }
+     const handleClick = (event) => {
+        event.preventDefault();
+        dispatch(getCountries(order))
+     }
 
-    const changeOrder = (event) => {
-        event.preventDefault()
-        setOrder(event.target.value)
-    }
+     function handleOrderPopulation(e){ //MAYOR O MENOR
+        e.preventDefault();
+        dispatch(orderPopulation(e.target.value))
+        setCurrentPage(1)
+        setOrder(`Ordenado ${e.target.value}`)
+       }
 
     function handleSort(event){
         event.preventDefault();
@@ -106,34 +108,41 @@ function Home(){
     }
 
     return (
+         <React.Fragment>
         <div className={styles.wallpaper}>
-            <header className={styles.titleContainer}>          
+               
                 <Link to='/'>
-                <h1 className={styles.title}>Países del mundo</h1>
+                <button className={styles.title}>Países del mundo</button>
                 </Link>
                 <div className={styles.center}>
                     <Link to='/activity' className={styles.button50} role="button">Create activity!</Link>
                 </div>
-            <Nav/>
-            </header>
+                
+            <Nav  setCurrentPage ={setCurrentPage}/>
+        
+            
                       
         
-        {/* <div className={styles.center}>
+         <div className={styles.center}>
             <button className={styles1.back} onClick={event => handleClick(event)}>Cargar paises nuevamente</button>
-        </div> */}
+        </div> 
+        
+        
         <div>
             <div className={styles.selectGap}>
-            <select onChange={event => changeOrder(event)} className={styles1.select}>
+            <select onChange={(e)=> handleOrderPopulation(e)} className={styles1.select}>
                 {/** Deben ser filtrados ascendente y descendente por orden alfabetico y por cantidad de poblacion
                  */}
-                <option>Ordenar por poblacion</option> 
-                <option value="ASC">Ascendente</option>
-                <option value="DESC">Descendente</option>
+               <option hidden value="all">Ordenar por poblacion</option>
+                    <option value="low">Descendente</option>
+                    <option value="high">Ascendente</option>
             </select>
+
+            
             <select onChange={event => handleSort(event)} className={styles1.select}>
                 {/** Deben ser filtrados ascendente y descendente por orden alfabetico y por cantidad de poblacion
                  */}
-                <option>Ordenar por nombre</option> 
+                <option hidden value="all">Ordenar por nombre</option> 
                 <option value="asc">Ascendente</option>
                 <option value="desc">Descendente</option>
             </select>
@@ -148,10 +157,11 @@ function Home(){
                 <option value="Europe">Europa</option>
                 <option value="Oceania">Oceania</option>
             </select>
+
             <select onChange={event => handleFilterActivity(event)} className={styles1.select}>
                 <option value="All">Todas</option>
                 { allActivities && allActivities.map(activity => (
-                    <option value={activity.name}>{activity.name}</option>
+                    <option value={activity.name} key={activity.id}>{activity.name}</option>
                 ))} 
             </select>
             
@@ -161,7 +171,9 @@ function Home(){
             {/* Se hace el map sobre el nuevo array de countries, para renderizar solo los 
             necesarios por pagina */}
             { isLoading ? <img src='../images/loading.gif' alt='Cargando...'/> :
+            
             <ul className={styles.countriesGrid}>
+
             {  currentCountries?.map(country => (
                 <Link to={'/home/' + country.id}>
                 <CountryCard 
@@ -190,9 +202,16 @@ function Home(){
 
         </div>
         </div>
+        </React.Fragment>
     )
+    
 }
 
 
 export default Home;
 
+
+
+/*      <header className={styles.titleContainer}> 
+    </header>
+*/

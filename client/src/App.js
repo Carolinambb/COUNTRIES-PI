@@ -4,7 +4,7 @@ import Home from './components/Home'
 //import Nav from './components/Nav'
 import LandingPage from './components/LandingPage'
 import CountryDetail from './components/CountryDetail';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import CreateActivity from './components/CreateActivity';
 
 function App() {
