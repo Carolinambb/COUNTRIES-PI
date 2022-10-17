@@ -66,10 +66,10 @@ function Home(){
 
     useEffect(() => {
         setIsLoading(true)
-        dispatch(getCountries(order),
+        dispatch(getCountries(),
         dispatch(getActivities()));
         setIsLoading(false)
-    }, [dispatch, order]) //Si alguno de estos valores cambia, se vuelve a ejecutar
+    }, [dispatch, ]) //Si alguno de estos valores cambia, se vuelve a ejecutar
 
     // if(isLoading){
     //     return <div>Cargando...</div>
@@ -77,7 +77,7 @@ function Home(){
 
      const handleClick = (event) => {
         event.preventDefault();
-        dispatch(getCountries(order))
+        dispatch(getCountries())
      }
 
      function handleOrderPopulation(e){ //MAYOR O MENOR

@@ -17,9 +17,9 @@ import axios from 'axios'
 // }
 
 // Conexion con el backend
-export function getCountries(order){ //rariii
+export function getCountries(){ //rariii
     return async function(dispatch){
-        let json = await axios.get('http://localhost:3001/api/countries?order=' + order);
+        let json = await axios.get('http://localhost:3001/api/countries');
        const data = json.data
         //const {currentCountries, totalPages} = paginado(data)
         return dispatch({
