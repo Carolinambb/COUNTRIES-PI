@@ -40,7 +40,8 @@ const CountryDetail = () => {
              <div className={styles.activities}>
              <div className={styles.actContainer}>
              {country.activities && country.activities.map((activity) => 
-             <ActivityCard 
+            
+            <ActivityCard 
                 name={activity.name} 
                 difficulty={activity.difficulty}
                 duration={activity.duration}
