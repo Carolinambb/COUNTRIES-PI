@@ -1,15 +1,13 @@
 
 .wallpaper{
     background: url(https://www.pixelstalk.net/wp-content/uploads/2016/04/Stars-wallpaper-HD-desktop.jpg)  no-repeat; 
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-    width: auto;
-    background-attachment: fixed;
-    /*height: 100rem;
-   padding: 5rem;
-  background-position: center;
-  background-size: cover;
+ 
+    height: 125rem;
+    padding: 5rem;
+   background-position: center;
+   background-size: cover;
+   
+    /*
   */
 }
 .countriesGrid{
@@ -85,11 +83,11 @@
 
 .center{
     display: flex;
-    align-items: right;
-    justify-content: right;
+    align-items: center;
+    justify-content: center;
     position: relative; 
-    top: 120px;
-    right: 15px;
+    top: 0px;
+    
   
 }
 
