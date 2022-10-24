@@ -1,53 +1,28 @@
 import axios from 'axios'
 
-// function paginado(data, page = 1){
-//     let countriesPage = 9;
-//     let currentPage = 1;
-//     if (page > 1){
-//         currentPage = page;
-//     }
-//     let totalPages = Math.ceil(data.length / countriesPage);
-//     //Posicion del ultimo pais
-//     const LastCountry = currentPage * countriesPage;
-//     //Posicion del primer pais
-//     const FirstCountry = LastCountry - countriesPage;
-//     // Se divide el array de acuerdo a la cantidad de paises necesarios (9)
-//     const currentCountries = data.slice(FirstCountry, LastCountry);
-//     return {currentCountries, totalPages}
-// }
-
-// Conexion con el backend
-export function getCountries(){ //rariii
+export function getCountries(){
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/api/countries');
-       const data = json.data
-        //const {currentCountries, totalPages} = paginado(data)
         return dispatch({
             type: 'GET_COUNTRIES',
-            payload: data
-            //payload: {data, currentCountries, totalPages, actualPage : 1}   
+            payload: json.data 
+              
         })
     }
 }
 
-/*export function getCountries(){
+
+export function getCountry(id){
     return async function(dispatch){
-        try {
-            var json = await axios.get('http://localhost:3001/countries')
-            console.log(json)
-       return dispatch({
-        type: "GET_COUNTRIES",
-        payload: json.data
-       })
-       
-        } catch (error) {
-            alert(error)
-        }
+        let json = await axios.get("http://localhost:3001/api/countries/" + id)
+        return dispatch({
+            type: 'GET_COUNTRY', 
+            payload: json.data
+        })
     }
-}*/ 
+}
 
-
-export const getCountry = (id) => dispatch => {
+/*export const getCountry = (id) => dispatch => {
     return fetch ("http://localhost:3001/api/countries/" + id)
     .then(response => response.json())
     .then(data => {
@@ -55,8 +30,22 @@ export const getCountry = (id) => dispatch => {
             type: 'GET_COUNTRY', 
             payload: data });
     });
-};
+};*/
 
+
+/*
+
+export funcion getCountry(id){
+    return async function(dispatch){
+        let json = await axios.get("http://localhost:3001/api/countries/" + id)
+        .then((res)=> res.json(json))
+        .then((data)=>dispatch({
+             type: 'GET_COUNTRY', 
+            payload: data 
+        }))
+    }
+}
+*/
 export function getActivities(){
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/api/activity');
@@ -83,7 +72,7 @@ export function getByName(name){
                 payload: json.data
             })
         } catch (error) {
-            console.log('No se pudo encontrar el pais')
+            alert('No se pudo encontrar el pais')
         }
     }
 }
@@ -93,7 +82,7 @@ export function orderName(payload){
         type: 'ORDER_BY_NAME',
         payload
     }
-} //problemas
+} 
 
 export function filterByContinent(payload){
     return {
@@ -114,12 +103,63 @@ export function orderPopulation(payload){
         type: "ORDER_BY_POPULATION",
         payload
     }
-} //problemas
+} 
 
-export const GET_COUNTRIES = 'GET_COUNTRIES';
+
+export function filterPopulation(payload){
+    return{
+        type: "filter_Population",
+        payload,
+    }
+}
+
+/*export function deleteActivity(id){
+    return async function(dispatch){
+        try {
+            const deleteact = await axios.get("http://localhost:3001/api/countries/" + id)
+            return dispatch({
+                type: 'DELETE_ACTIVITY',
+                payload: deleteact
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}*/
+
+
+export function deleteActivity(id) {
+    return async function (dispatch) {
+        try {
+            const deleteact = await axios.delete("http://localhost:3001/api/deleted/" + id);
+            return dispatch({
+                type: 'DELETE_ACTIVITY',
+                payload: deleteact,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+}
+
+export function cleanGame() {
+    return {
+        type: 'CLEAN_GAME',
+        payload: {},
+    };
+}
+
+export function cleaner() {
+    return {
+        type: 'CLEANER',
+        payload: {},
+    };
+}
+
+/*export const GET_COUNTRIES = 'GET_COUNTRIES';
 export const GET_COUNTRY = 'GET_COUNTRY';
 export const GET_BY_NAME = 'GET_BY_NAME';
 export const GET_ACTIVITY = 'GET_ACTIVITY';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const FILTER_CONTINENT = 'FILTER_CONTINENT';
-export const FILTER_ACTIVITY = 'FILTER_ACTIVITY'
+export const FILTER_ACTIVITY = 'FILTER_ACTIVITY'*/

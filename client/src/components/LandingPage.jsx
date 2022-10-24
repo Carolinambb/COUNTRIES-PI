@@ -6,7 +6,7 @@ import styles1 from './Button.module.css'
 function LandingPage(){
     return (
         <div className={styles.landing}>
-            <h1 className={styles.title_landing}>Welcome!</h1>
+            <h1 className={styles.title_landing}>Bienvenido!</h1>
             <Link to='/home'>
                 <div className={styles.center}>
 

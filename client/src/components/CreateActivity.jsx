@@ -20,11 +20,14 @@ function validate(input) {
      }else if(input.duration  > 24 || input.duration < 1)
      errors.duration = ("La duracion debe ser entre 1hs y 24hs")
      
-     else if(!input.season){
+    else if(!input.season){
         errors.season = ("Se requiere una temporada")
+
     }else if(input.countries.length === 0){
         errors.countries = ("Se requiere al menos un país")
     }
+
+
     return errors
 }
 
@@ -43,7 +46,7 @@ export default function CreateActivity() {
         difficulty: '',
         duration: '',
         season:'',
-        countries: []
+        countries: [],
     })
 
 
@@ -53,7 +56,6 @@ export default function CreateActivity() {
     
     console.log(input)
 
-    //const [buttonActivated, setButtonActivated] = useState(false)
 
     // function validateName(value) {
     //     if(!/^[a-zA-Z]+$/.test(value)) {
@@ -102,9 +104,14 @@ export default function CreateActivity() {
             [e.target.name] : e.target.value
          }))
     }
+   
+
+
+
+
 
     function handleSubmit(e){
-        if(!input.name || !input.difficulty || !input.duration || !input.season || !input.countries){
+        if( !input.countries|| !input.difficulty || !input.duration || !input.season ||!input.name ){
             e.preventDefault();
             alert('Complete todos los campos para poder continuar')
         } else {
@@ -119,7 +126,7 @@ export default function CreateActivity() {
                 difficulty: '',
                 duration: '',
                 season:'',
-                countries: []
+                countries: [],
             })
         }
          setErrors(validate({
@@ -135,12 +142,6 @@ export default function CreateActivity() {
             countries: input.countries.filter(country => country !== e)
         })
     }
-
-   
-
-    // if(input.name && input.difficulty && input.duration && input.season && input.countries){
-    //     setButtonActivated(true)
-    // }
 
     return (
         <div  className={styles.create}>
@@ -181,7 +182,7 @@ export default function CreateActivity() {
                 </div>
                 <div className={styles.container}>
                     <label className={styles.label}>Duracion: </label>
-                    <input type="number" min="" max="24"  value={input.duration} name='duration' onChange={handleChange} className={styles.input}/>
+                    <input type="number" min="1" max="24"  value={input.duration} name='duration' onChange={handleChange} className={styles.input}/>
                     {errors.duration && (<p>{errors.duration}</p>)}
                 </div>
                 <div className={styles.container}>
@@ -202,15 +203,16 @@ export default function CreateActivity() {
                 </div>
 
                 <div className={styles.container}>
-                    <label className={styles.label}>Pais donde se realiza: </label>
-                    <div >
+                    <label className={styles.label}>Pais donde se realiza: </label> 
                     <select onChange={(e) => handleSelect(e)} className={styles1.select}>
-                    <option>Seleccionar pais</option>
-                    {countries.map((country) => (
+                  <option value='selected' hidden >Seleccionar pais</option>
+
+                   {countries?.map((country) => (
                         <option value={country.name} key={country.id}>{country.name}</option>
                     ))}
+
                     </select>
-                    </div>
+                    
                     {errors.countries && (<p>{errors.countries}</p>)}
                 </div>
 
@@ -229,3 +231,6 @@ export default function CreateActivity() {
         </div>
     )
 }
+
+
+

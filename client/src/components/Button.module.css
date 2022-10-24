@@ -72,11 +72,11 @@
 
 /*BOTON DEL DETAIL DE VOLVER*/
 
-
-/* CSS */
 .back {
+  right: 7rem;
+  top: -10px;
   align-items: center;
-  background-color: #fee6e3;
+  background-color: #fef3e3;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
@@ -218,7 +218,7 @@
 
 /* CSS */
 .reload {
-  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  background: linear-gradient(to bottom right, #ded7a6, #54dea5);
   border: 0;
   border-radius: 12px;
   color: #FFFFFF;
@@ -241,18 +241,20 @@
   display: flex;
   justify-content: right;
   position: relative; 
-  top: -90px;
-  left: 74rem;
+
 }
 
 .reload:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(71, 239, 222, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .reload:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(119, 220, 233, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .back{
   left: 45rem;
 }
+
+/* CSS este es el cargar paises */
+

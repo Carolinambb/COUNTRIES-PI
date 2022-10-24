@@ -1,11 +1,10 @@
-import React from 'react';
-import styles from './ActivityCard.module.css'
+import {React} from 'react';
+import styles from './ActivityCard.module.css';
 
-const ActivityCard = (activity) => {
-
-    return (
+export default function ActivityCard (activity) {
+  return (
         <div className={styles.card}>
-            {activity && (
+        {activity && (
              
                 <p key={activity.id}>
             <p><strong>Actividad: </strong>{activity.name}</p>
@@ -14,10 +13,8 @@ const ActivityCard = (activity) => {
             <p><strong>Temporada: </strong>{activity.season}</p>
             </p> 
             
-            )  } 
-            
+            )  }       
         </div>
+        
     );
 };
-
-export default ActivityCard;

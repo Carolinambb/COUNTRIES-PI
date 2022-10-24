@@ -1,10 +1,7 @@
 .searchContainer{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    position: relative; 
-    top: -8rem;
-    right: 30px;
+    text-align:right;
+
+    right: 10px;
 }
 
 .searchBox{
@@ -17,23 +14,21 @@
     top: 0;
     cursor: pointer;
     height: 100%;
-
-    border: none;
+    border: transparent;
     background: transparent;
 }
 
 .searchInput{
-    height: 20px;
+    height: 25px;
     border-radius: 20px;
     padding: 5px 50px 5px 10px;
     font-size: 0.8rem;
-    border: 2px solid  rgb(149, 109, 109);
+    border: 3px solid  rgb(149, 109, 109);
     background-color: #fefefe;
 }
 
 .searchInput:focus, 
 .searchButton:focus{
-    outline: none;
-    border: 1px solid #2c12c4;
-    box-shadow: 0 0 5px #6155b1;
+    border: 3px solid #12c47a;
+    box-shadow: 0 0 5px #5de290;
 }

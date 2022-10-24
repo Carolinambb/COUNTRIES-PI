@@ -5,15 +5,13 @@ const Sequelize = require('sequelize')
 
 const axios = require('axios');
 
-//Traemos las tablas de db
-const { Country, Activity, country_activity} = require('../db.js');
 
-// const Countries = require('./countries.js');
+const { Country, Activity} = require('../db.js');
 
 const router = Router();
 
 // Configurar los routers
-// router.use('/countries', Countries);
+
 
 // Busco la data de la API
 
@@ -27,7 +25,7 @@ const countriesApi = async () => {
             flags: country.flags[0],
             continent: country.continents[0],
             capital: country.capital != null ? country.capital : 'No se encontro capital',
-            subregion: country.subregion,
+            subregion: country.subregion != null ? country.subregion : 'No se encontro subregion',
             area: country.area,
             population: country.population
         }
@@ -41,19 +39,18 @@ const dbComplete = async () => {
     //consulta a la DB
     // console.log('Inicia consulta a DB')
     let countries = await Country.findAll();
-    // console.log('Fin consulta a DB')
 
-    //si la DB esta vacia cargo los datos
+  //si la DB esta vacia cargo los datos
     if (countries.length === 0) {
         // solicitud a restcountries
         const arrCountries = await countriesApi();
         // console.log(' en /countries InfoCountries ejemplo 1: ', arrCountries[0])
 
-        // Creating in bulk, creo los datos en masa.
         //https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#creating-in-bulk
         // console.log(' Inicia carga de DB con bulkCreate')
-        await Country.bulkCreate(arrCountries);
+        await Country.bulkCreate(arrCountries); 
         // console.log('Fin carga de DB con bulkCreate')
+        //Sequelize proporciona el método Model.bulkCreate para permitir la creación de varios registros a la vez, con una sola consulta
     }
 };
 
@@ -69,16 +66,14 @@ router.get('/countries', async (req, res) => {
                 {
                     where: {
                         name: {
-                            [Sequelize.Op.iLike]: `%${name}%`,
+                            [Sequelize.Op.iLike]: `%${name}%`, //los % son para realizar una consulta parcial.
                             //ver https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#operators
-                        }
+                        } //es un metodo para realizar una consulta de búsqueda que no distinga entre mayúsculas y minúsculas.
                     }
                 }
             );
             if (!result.length) {
-                return res
-                    .status(200)
-                    .send("No se encuentran paises para la busqueda")
+                return res.status(400).send("No se encuentran paises para la busqueda")
             }
             return res.status(200).json(result)
         }
@@ -95,6 +90,102 @@ router.get('/countries', async (req, res) => {
 
     } catch (error) {
         console.log(error);
+    }
+})
+
+
+
+
+
+/////////////////////////////////////////////
+router.get('/countries/:id', async (req,res) => {
+    // Obtener el detalle de un país en particular
+    // Debe traer solo los datos pedidos en la ruta de detalle de país
+    // Incluir los datos de las actividades turísticas correspondientes
+
+    const countryId = req.params.id
+
+    let countryById = await Country.findByPk(countryId, {  //El método findByPk obtiene solo una entrada de la tabla, utilizando la clave principal proporcionada.
+        include : {
+            model : Activity
+        }
+    })
+
+    res.status(200).send(countryById)
+})
+
+
+
+
+router.get('/activity', async (req,res) => {
+    try {
+        let activities = await Activity.findAll()
+        res.status(200).send(activities)
+    } catch (errors) {
+        res.status(500).send('Error')
+    }
+})
+
+
+
+
+router.post('/activity', async (req,res) => {
+    try{
+        let {name, difficulty, duration, season, countries} = req.body
+        // Se crea la actividad
+        let newActivity = await Activity.create({
+            name,
+            difficulty,
+            duration,
+            season,
+            
+        })
+
+        // Reviso el array de paises para ver en cual se debe crear la actividad 
+        countries.forEach(async (country) => {
+            let activityCountry = await Country.findOne({ // obtiene la primera entrada que encuentra (que cumple con las opciones de consulta opcionales, si se proporcionan).
+                where: {
+                    name: country
+                }
+            }) 
+            await newActivity.addCountry(activityCountry)
+        });
+        res.status(200).send('La actividad se creo exitosamente')
+    } catch(error) {
+        
+        res.status(500).send('No se pudo crear la actividad')
+    }
+})
+
+
+router.delete("/:id", async function (req, res) {
+    const { id } = req.params;
+    try {
+        if (id) {
+            await Activity.destroy({
+                where: { id: id },
+            });
+            res.send({ msg: "Actividad eliminada" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.put("/:id", async (req, res) =>{
+    const id = req.params.id
+    const activity = req.body
+
+    try{
+        let act = await Activity.update(activity, {
+            where: {
+                id : id
+            }
+        });
+        return res.send({ msg: "Actividad modificada" });
+
+    } catch(error){
+        console.log(error)
     }
 })
 
@@ -140,169 +231,6 @@ if(name){
     res.status(200).send(total)
 }
 })*/
-
-
-
-
-
-
-//////////////////////////////////////
-
-/*router.get('/countries', async (req,res) => {
-    // Se traen todos los paises desde la API a la DB para utilizarlos desde ahi
-    // Se almacenan solo los datos necesarios para la ruta principal 
-    // Se obtiene un listado de los paises
-
-    // Guardo en una constante lo que obtengo de la api
-    const countries = await countriesApi()
-
-    // Guardo el name pasado por query
-    const queryName = req.query.name
-
-    const queryOrder = req.query.order //esto rariii
-
-    try{
-        // Si la db esta llena no se hace nada
-        let full = await Country.findAll({
-            include: {
-                model: Activity,
-            }
-        })
-        // Si no hay datos, se crean
-        if(!full.length){
-            // bulkCreate busca los campos en el objeto y los pasa a la tabla
-            // los datos del objeto para los que no hay campos en la tabla, no los guarda
-            await Country.bulkCreate(countries)
-        } 
-    } catch (error){
-        console.log(error) 
-    }
-
-    if(queryName){
-        let countryName = await Country.findAll({
-            where : {
-                name: {
-                    // Operador que busca coincidencias y no es case sensitive
-                    //Si solo pongo queryName me toma la busqueda exacta
-                    [Sequelize.Op.iLike] : `%${queryName}%`
-                }
-            }
-        })
-        countryName.length ?
-        res.status(200).send(countryName) :
-        res.status(404).send('No se encontro el pais')
-    } else if(queryOrder){
-        try {
-        let country = await Country.findAll({
-            // Trae hasta 9 paises
-            // limit : 9,
-            // Paginado - desde donde empieza a contar
-            // offset: req.query.page,
-            order : [['population', queryOrder]],
-            include: {
-                model: Activity,
-            }
-        })
-        res.status(200).send(country)
-        } catch (error) {
-        res.status(500).send('Error')
-        }
-    } else {
-        let full = await Country.findAll({
-            include: {
-                model: Activity
-            }
-        })
-        res.status(200).send(full)
-    }
-
-})*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////
-router.get('/countries/:id', async (req,res) => {
-    // Obtener el detalle de un país en particular
-    // Debe traer solo los datos pedidos en la ruta de detalle de país
-    // Incluir los datos de las actividades turísticas correspondientes
-
-    const countryId = req.params.id
-
-    let countryById = await Country.findByPk(countryId, {
-        include : {
-            model : Activity
-        }
-    })
-
-    res.status(200).send(countryById)
-})
-
-
-
-
-router.get('/activity', async (req,res) => {
-    try {
-        let activities = await Activity.findAll()
-        res.status(200).send(activities)
-    } catch (errors) {
-        res.status(500).send('Error')
-    }
-})
-
-
-
-
-router.post('/activity', async (req,res) => {
-    try{
-        let {name, difficulty, duration, season, countries} = req.body
-        // Se crea la actividad
-        let newActivity = await Activity.create({
-            name,
-            difficulty,
-            duration,
-            season
-        })
-
-        // Reviso el array de paises para ver en cual se debe crear la actividad 
-        countries.forEach(async (country) => {
-            let activityCountry = await Country.findOne({
-                where: {
-                    name: country
-                }
-            }) 
-            await newActivity.addCountry(activityCountry)
-        });
-        res.status(200).send('La actividad se creo exitosamente')
-    } catch(error) {
-        console.log(error)
-        res.status(500).send('No se pudo crear la actividad')
-    }
-})
 
 
 

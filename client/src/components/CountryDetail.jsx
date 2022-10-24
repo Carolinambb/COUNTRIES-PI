@@ -1,23 +1,25 @@
 import {React, useEffect} from 'react';
 import { useParams } from 'react-router';
-import { getCountry } from '../actions'
+import { getCountry} from '../actions'
 import { useDispatch, useSelector } from 'react-redux';
 import ActivityCard from './ActivityCard'
 import styles from './CountryDetail.module.css'
 import { Link } from 'react-router-dom';
+
 import styles1 from './Button.module.css'
 
 const CountryDetail = () => {
     
     const {countryId} = useParams();
     const dispatch = useDispatch();
-    
+  
     
     useEffect(() => {
         dispatch(getCountry(countryId));
       }, [dispatch, countryId]);
 
     const country = useSelector((state) => state.country)
+
 
     return (
         <div className={styles.background}>

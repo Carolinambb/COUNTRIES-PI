@@ -1,4 +1,4 @@
-import {GET_COUNTRIES, GET_COUNTRY, GET_BY_NAME, FILTER_CONTINENT, FILTER_ACTIVITY, GET_ACTIVITY, ORDER_BY_NAME} from '../actions'
+//import {GET_COUNTRIES, GET_COUNTRY, GET_BY_NAME, FILTER_CONTINENT, FILTER_ACTIVITY, GET_ACTIVITY, ORDER_BY_NAME} from '../actions'
 
 const initialState = {
     // Estado para renderizar, se usa para hacer el filtrado
@@ -6,36 +6,39 @@ const initialState = {
     // Estado soporte que siempre tiene todos los paises 
     allCountries : [],
     activities : [],
-    country: []
+    country: [], //para el detail y otras
+
+
+    loader: true
 }
 
 function rootReducer(state = initialState, action){
     switch (action.type) {
-        case GET_COUNTRIES:
+        case "GET_COUNTRIES":
             return {
                 ...state,
                 countries: action.payload,
                 allCountries: action.payload
             } 
-        case GET_BY_NAME:
+        case "GET_BY_NAME":
             return {
                 ...state,
                 countries: action.payload
             }      
-        case GET_COUNTRY: return {
+        case "GET_COUNTRY": return {
             ...state,
             country: action.payload
         }    
-        case GET_ACTIVITY:
+        case "GET_ACTIVITY":
             return {
                 ...state,
                 activities: action.payload
             }    
-        case 'POST_ACTIVITY':
+        case "POST_ACTIVITY":
             return{
                 ...state
             }
-        case ORDER_BY_NAME:
+        case "ORDER_BY_NAME":
             let sortedCountries = action.payload === 'asc' ?
             state.countries.sort((a,b) => a.name.localeCompare(b.name)) :
             state.countries.sort((a,b) => b.name.localeCompare(a.name));
@@ -43,7 +46,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 countries: sortedCountries
             }    
-        case FILTER_CONTINENT:
+        case "FILTER_CONTINENT":
             const allCountries = state.allCountries
             const continentFilter = action.payload === 'All' ?
             allCountries : allCountries.filter(country => 
@@ -53,7 +56,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 countries : continentFilter
             }   
-        case FILTER_ACTIVITY:
+        case "FILTER_ACTIVITY":
             const allCountriesAct = state.allCountries
             const activitiesFilter = action.payload === 'All' ?
             allCountriesAct : allCountriesAct.filter(country => 
@@ -70,9 +73,42 @@ function rootReducer(state = initialState, action){
                 :
                 state.countries.sort((a,b)=> a.population < b.population ? -1 : 1)
                 console.log(state.countries)
+
                 return{
                     ...state,
                     countries: orderPopulation
+                }  
+
+                case 'DELETE_ACTIVITY':
+            return {
+                 ...state,
+                 activities: action.payload
+                 }
+
+
+            case "CLEAN_GAME":
+                return { ...state, loader: true }
+    
+            case "CLEANER": {
+                return {
+                    ...state,
+                    activities: {}
+                }
+            }
+
+            case "filter_Population":
+               
+
+                const allCountries4 = state.allCountries
+                const continentFilter4 = action.payload === 'All' ?
+                allCountries4 : allCountries4.filter(c => c.population > 100000000)
+                    
+
+
+                   // const continentFilter4 = state.allCountries.filter(c => c.population > 100000000)
+                return{
+                    ...state,
+                    countries: continentFilter4
                 }  
         default :
         return state;    
