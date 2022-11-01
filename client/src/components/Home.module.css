@@ -2,10 +2,8 @@
 .wallpaper{
     background: url(https://www.pixelstalk.net/wp-content/uploads/2016/04/Stars-wallpaper-HD-desktop.jpg)  no-repeat; 
  
-    height: 125rem;
-    padding: 5rem;
-   background-position: center;
-   background-size: cover;
+    background-size: 25px 50px;
+    background-size: 100% 100%;
    
     /*
   */

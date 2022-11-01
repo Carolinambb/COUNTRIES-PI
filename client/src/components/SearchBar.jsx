@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { getByName } from "../actions";
 import styles from './SearchBar.module.css'
 
-
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -12,12 +11,10 @@ export default function SearchBar() {
     e.preventDefault();
     setName(e.target.value);
   }
-  console.log(name);
-
+  //console.log(name);
 
   const handleClick = (event) => {
     event.preventDefault();
-    // Name es mi estado local
     dispatch(getByName(name));
     setName('')
   };
@@ -30,7 +27,7 @@ export default function SearchBar() {
         placeholder="Search country..."
         onChange={(e) => handleInputChange(e)}
       />
-      <button className={styles.searchButton} type="submit">Buscar</button>
+      <button className={styles.searchButton} type="submit">Search</button>
       </div>
     </form>
   );

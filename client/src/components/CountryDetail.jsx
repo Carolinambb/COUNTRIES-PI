@@ -32,12 +32,12 @@ const CountryDetail = () => {
             </div>
            <img src={country.flags} alt={country.name} className={`${styles.col} ${styles.countryImage}`}/>
            <div className={`${styles.col} ${styles.countryDetails}`}>
-             <p className={styles.firstItem}><strong>País:</strong> {country.name}</p>
-             <p><strong>Continente:</strong>{country.continent}</p>
+             <p className={styles.firstItem}><strong>Country:</strong> {country.name}</p>
+             <p><strong>Continent: </strong>{country.continent}</p>
              <p><strong>Capital:</strong> {country.capital}</p>
-             <p><strong>Subregión:</strong> {country.subregion}</p>
-             <p><strong>Área:</strong> {country.area} km2</p>
-             <p><strong>Población:</strong> {country.population} habitantes</p>
+             <p><strong>Subregion:</strong> {country.subregion}</p>
+             <p><strong>Area:</strong> {country.area} km2</p>
+             <p><strong>Population:</strong> {country.population} </p>
              
              <div className={styles.activities}>
              <div className={styles.actContainer}>
@@ -47,7 +47,8 @@ const CountryDetail = () => {
                 name={activity.name} 
                 difficulty={activity.difficulty}
                 duration={activity.duration}
-                season={activity.season} />)}
+                season={activity.season}
+                 />)}
              </div>
              </div>
             </div>  

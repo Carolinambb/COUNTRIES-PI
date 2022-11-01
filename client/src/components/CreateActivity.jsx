@@ -8,7 +8,6 @@ import styles1 from './Button.module.css'
 
 function validate(input) {
     let errors = {}
-
     if(!input.name){
         errors.name = ("Se requiere un nombre") }
        else if(input.name.length > 40){
@@ -27,7 +26,6 @@ function validate(input) {
         errors.countries = ("Se requiere al menos un país")
     }
 
-
     return errors
 }
 
@@ -35,7 +33,7 @@ function validate(input) {
 export default function CreateActivity() {
     const dispatch = useDispatch()
 
-    const history = useHistory() //o navigate
+    const history = useHistory() 
 
     const countries = useSelector((state) => state.countries)
 
@@ -51,20 +49,10 @@ export default function CreateActivity() {
 
 
     useEffect(() => {
-        dispatch(getCountries('ASC')) //fijarse eso
+        dispatch(getCountries()) //fijarse eso
     }, [dispatch])
     
     console.log(input)
-
-
-    // function validateName(value) {
-    //     if(!/^[a-zA-Z]+$/.test(value)) {
-    //       setErrors('El nombre solo debe contener letras');
-    //     } else {
-    //       setErrors('')
-    //     }
-    //     setInput(value)
-    // }
 
     function handleChange(e){
         // Le agregamos el e.target.value (lo que vamos modificando) al input actual 
@@ -76,9 +64,8 @@ export default function CreateActivity() {
           [e.target.name]: [e.target.value]
         })
         )
-    
-
     }
+
 
     function handleCheck(e){
         if(e.target.checked){
@@ -93,32 +80,30 @@ export default function CreateActivity() {
          }))
     }
 
-    function handleSelect(e){
+
+    function handleSelectCountry (e){
+        e.preventDefault()
         setInput({
             ...input,
             // Concateno lo que ya habia en el array, con el nuevo value
-            countries: [...input.countries, e.target.value]
+            countries: [...new Set([...input.countries, e.target.value])]
         })
-         setErrors(validate({
-            ...input, 
-            [e.target.name] : e.target.value
-         }))
+        setErrors(validate({
+            ...input,
+            countries: [...input.countries, e.target.value]
+        }))
     }
-   
-
-
 
 
 
     function handleSubmit(e){
-        if( !input.countries|| !input.difficulty || !input.duration || !input.season ||!input.name ){
+        if( input.countries < 1 || !input.difficulty || !input.duration || !input.season ||!input.name ){
             e.preventDefault();
             alert('Complete todos los campos para poder continuar')
         } else {
             e.preventDefault();
             dispatch(postActivity(input));
             alert('Tu actividad ha sido creada exitosamente');
-            // Para volver a la pantalla principal
             history.push('/home')
             // Reseteamos el input
             setInput({
@@ -147,23 +132,21 @@ export default function CreateActivity() {
         <div  className={styles.create}>
             <div>
             <Link to='/home'>
-                <button className={styles1.back}>Volver</button>
+                <button className={styles1.back}>Go back</button>
             </Link>
             </div>
-            <h1 className={styles.title}>Crear actividad</h1>
+            <h1 className={styles.title}>Create activity</h1>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.justify}>
-                <div >
-
-
+                <div>
                 <div className={styles.container}>
-                    <label className={styles.label}>Nombre: </label>
+                    <label className={styles.label}>Name: </label>
                     <input type="text" value={input.name} name='name' onChange={handleChange} className={styles.input}/>
                     {errors.name && (<p>{errors.name}</p>)}
                 </div>
-
+                
 
                 <div className={styles.container}>
-                    <label className={styles.label}>Dificultad: </label>
+                    <label className={styles.label}>Difficulty: </label>
                     <label>
                     <input type="radio" value='1' name='difficulty' onChange={(e) => handleCheck(e)}/>
                     1</label>
@@ -181,31 +164,31 @@ export default function CreateActivity() {
                     5</label>
                 </div>
                 <div className={styles.container}>
-                    <label className={styles.label}>Duracion: </label>
+                    <label className={styles.label}>Duration: </label>
                     <input type="number" min="1" max="24"  value={input.duration} name='duration' onChange={handleChange} className={styles.input}/>
                     {errors.duration && (<p>{errors.duration}</p>)}
                 </div>
                 <div className={styles.container}>
-                    <label className={styles.label}>Temporada: </label>
+                    <label className={styles.label}>Season: </label>
                     <label>
                     <input type="radio" value='Verano' name='season' onChange={(e) => handleCheck(e)}/>
-                    Verano</label>
+                    Summer</label>
                     <label>
                     <input type="radio" value='Primavera' name='season' onChange={(e) => handleCheck(e)}/>
-                    Primavera</label>
+                    Spring</label>
                     <label>
                     <input type="radio" value='Otoño' name='season' onChange={(e) => handleCheck(e)}/>
-                    Otoño</label>
+                    Autumn</label>
                     <label>
                     <input type="radio" value='Invierno' name='season' onChange={(e) => handleCheck(e)}/>
-                    Invierno</label>
+                    Winter</label>
                     {errors.season && (<p>{errors.season}</p>)}
                 </div>
 
                 <div className={styles.container}>
-                    <label className={styles.label}>Pais donde se realiza: </label> 
-                    <select onChange={(e) => handleSelect(e)} className={styles1.select}>
-                  <option value='selected' hidden >Seleccionar pais</option>
+                    <label className={styles.label}>Country: </label> 
+                    <select onChange={(e) => handleSelectCountry(e)} className={styles1.select}>
+                  <option value='selected' hidden >Select country</option>
 
                    {countries?.map((country) => (
                         <option value={country.name} key={country.id}>{country.name}</option>
@@ -224,7 +207,7 @@ export default function CreateActivity() {
                 
                 )}
                 <div className={styles.center}>
-                <button type='submit' className={styles1.btn_submit}>Crear actividad</button>
+                <button type='submit' className={styles1.btn_submit}>Create acitvity</button>
                 </div>
                 </div>
             </form>

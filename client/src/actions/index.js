@@ -22,30 +22,7 @@ export function getCountry(id){
     }
 }
 
-/*export const getCountry = (id) => dispatch => {
-    return fetch ("http://localhost:3001/api/countries/" + id)
-    .then(response => response.json())
-    .then(data => {
-        dispatch({
-            type: 'GET_COUNTRY', 
-            payload: data });
-    });
-};*/
 
-
-/*
-
-export funcion getCountry(id){
-    return async function(dispatch){
-        let json = await axios.get("http://localhost:3001/api/countries/" + id)
-        .then((res)=> res.json(json))
-        .then((data)=>dispatch({
-             type: 'GET_COUNTRY', 
-            payload: data 
-        }))
-    }
-}
-*/
 export function getActivities(){
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/api/activity');
@@ -57,7 +34,7 @@ export function getActivities(){
 }
 
 export function postActivity(payload){
-    return async function(dispatch){
+    return async function(){
         let json = await axios.post('http://localhost:3001/api/activity', payload);
         return json;
     }
@@ -104,62 +81,3 @@ export function orderPopulation(payload){
         payload
     }
 } 
-
-
-export function filterPopulation(payload){
-    return{
-        type: "filter_Population",
-        payload,
-    }
-}
-
-/*export function deleteActivity(id){
-    return async function(dispatch){
-        try {
-            const deleteact = await axios.get("http://localhost:3001/api/countries/" + id)
-            return dispatch({
-                type: 'DELETE_ACTIVITY',
-                payload: deleteact
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}*/
-
-
-export function deleteActivity(id) {
-    return async function (dispatch) {
-        try {
-            const deleteact = await axios.delete("http://localhost:3001/api/deleted/" + id);
-            return dispatch({
-                type: 'DELETE_ACTIVITY',
-                payload: deleteact,
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-}
-
-export function cleanGame() {
-    return {
-        type: 'CLEAN_GAME',
-        payload: {},
-    };
-}
-
-export function cleaner() {
-    return {
-        type: 'CLEANER',
-        payload: {},
-    };
-}
-
-/*export const GET_COUNTRIES = 'GET_COUNTRIES';
-export const GET_COUNTRY = 'GET_COUNTRY';
-export const GET_BY_NAME = 'GET_BY_NAME';
-export const GET_ACTIVITY = 'GET_ACTIVITY';
-export const ORDER_BY_NAME = 'ORDER_BY_NAME';
-export const FILTER_CONTINENT = 'FILTER_CONTINENT';
-export const FILTER_ACTIVITY = 'FILTER_ACTIVITY'*/

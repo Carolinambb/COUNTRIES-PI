@@ -1,15 +1,11 @@
-//import {GET_COUNTRIES, GET_COUNTRY, GET_BY_NAME, FILTER_CONTINENT, FILTER_ACTIVITY, GET_ACTIVITY, ORDER_BY_NAME} from '../actions'
-
 const initialState = {
     // Estado para renderizar, se usa para hacer el filtrado
     countries : [],
     // Estado soporte que siempre tiene todos los paises 
     allCountries : [],
     activities : [],
-    country: [], //para el detail y otras
+    country: [], //para el detail 
 
-
-    loader: true
 }
 
 function rootReducer(state = initialState, action){
@@ -25,7 +21,8 @@ function rootReducer(state = initialState, action){
                 ...state,
                 countries: action.payload
             }      
-        case "GET_COUNTRY": return {
+        case "GET_COUNTRY": 
+        return {
             ...state,
             country: action.payload
         }    
@@ -34,10 +31,10 @@ function rootReducer(state = initialState, action){
                 ...state,
                 activities: action.payload
             }    
-        case "POST_ACTIVITY":
+        /*case "POST_ACTIVITY":
             return{
                 ...state
-            }
+            }*/
         case "ORDER_BY_NAME":
             let sortedCountries = action.payload === 'asc' ?
             state.countries.sort((a,b) => a.name.localeCompare(b.name)) :
@@ -72,44 +69,14 @@ function rootReducer(state = initialState, action){
                 state.countries.sort((a,b)=> a.population < b.population ? 1 : -1)
                 :
                 state.countries.sort((a,b)=> a.population < b.population ? -1 : 1)
-                console.log(state.countries)
+                //console.log(state.countries)
 
                 return{
                     ...state,
                     countries: orderPopulation
                 }  
 
-                case 'DELETE_ACTIVITY':
-            return {
-                 ...state,
-                 activities: action.payload
-                 }
-
-
-            case "CLEAN_GAME":
-                return { ...state, loader: true }
-    
-            case "CLEANER": {
-                return {
-                    ...state,
-                    activities: {}
-                }
-            }
-
-            case "filter_Population":
-               
-
-                const allCountries4 = state.allCountries
-                const continentFilter4 = action.payload === 'All' ?
-                allCountries4 : allCountries4.filter(c => c.population > 100000000)
-                    
-
-
-                   // const continentFilter4 = state.allCountries.filter(c => c.population > 100000000)
-                return{
-                    ...state,
-                    countries: continentFilter4
-                }  
+           
         default :
         return state;    
     }
