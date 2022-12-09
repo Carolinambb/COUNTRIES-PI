@@ -7,7 +7,7 @@
 # Individual Project - Henry Countries
 
 <p align="left">
-  <img height="200" src="./countries.png" />
+  <img height="200" src="./countriesWorld.png" />
 </p>
 
 ## Objetivos del Proyecto
@@ -173,4 +173,4 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 <img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/ladingWelcome.png" alt="landing" width="40%" height="40%" > 
 <img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/countries.png" alt="countries" width="40%" height="40%"> 
 <img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/detailCountry.png" alt="detail" width="40%" height="40%"> 
-<img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/form.png" alt="form" width="40%" height="40%" > 
+<img src="https://user-images.githubusercontent.com/Carolinambb/Carolinambb/master/form.png" alt="form" width="40%" height="40%" > 
