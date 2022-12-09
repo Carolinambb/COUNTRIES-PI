@@ -1,6 +1,8 @@
-<p align='left'>
+<!-- <p align='left'>
     <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
-</p>
+</p> -->
+![BANNER GitHub](https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/BannerCarolinaCenter.png)
+<!-- <img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/BannerCarolinaCenter.png" alt="banner carolina riveiro full stack"> -->
 
 # Individual Project - Henry Countries
 
@@ -60,9 +62,9 @@ Para verificar que versión tienen instalada:
 - Hay una carpeta llamada `api` en donde hay que crear un archivo llamado: `.env` que tenga la siguiente forma:
 
 
-DB_USER=usuariodepostgres
-DB_PASSWORD=passwordDePostgres
-DB_HOST=localhost
+- `DB_USER=usuariodepostgres`
+- `DB_PASSWORD=passwordDePostgres`
+- `DB_HOST=localhost`
 
 Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. 
 
