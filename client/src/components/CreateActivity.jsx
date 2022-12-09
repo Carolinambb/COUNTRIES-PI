@@ -9,21 +9,21 @@ import styles1 from './Button.module.css'
 function validate(input) {
     let errors = {}
     if(!input.name){
-        errors.name = ("Se requiere un nombre") }
+        errors.name = ("Name is required") }
        else if(input.name.length > 40){
-        errors.name = ("El nombre es muy largo")        
+        errors.name = ("Name is to long")        
      } else if(!input.difficulty){
-        errors.difficulty = ("Se requiere poner una dificultad")
+        errors.difficulty = ("Difficulty is required")
     }else if(!input.duration){
-        errors.duration =("Se requiere duracion") 
+        errors.duration =("Duration is required") 
      }else if(input.duration  > 24 || input.duration < 1)
-     errors.duration = ("La duracion debe ser entre 1hs y 24hs")
+     errors.duration = ("The duration must be between 1hs and 24hs")
      
     else if(!input.season){
-        errors.season = ("Se requiere una temporada")
+        errors.season = ("Season is required")
 
     }else if(input.countries.length === 0){
-        errors.countries = ("Se requiere al menos un país")
+        errors.countries = ("At least one country is required")
     }
 
     return errors
@@ -99,11 +99,11 @@ export default function CreateActivity() {
     function handleSubmit(e){
         if( input.countries < 1 || !input.difficulty || !input.duration || !input.season ||!input.name ){
             e.preventDefault();
-            alert('Complete todos los campos para poder continuar')
+            alert('Complete all the fields to be able to continue')
         } else {
             e.preventDefault();
             dispatch(postActivity(input));
-            alert('Tu actividad ha sido creada exitosamente');
+            alert('Your activity has been successfully created');
             history.push('/home')
             // Reseteamos el input
             setInput({
@@ -132,7 +132,7 @@ export default function CreateActivity() {
         <div  className={styles.create}>
             <div>
             <Link to='/home'>
-                <button className={styles1.back}>Go back</button>
+                <button className={styles1.back_form}>Go back</button>
             </Link>
             </div>
             <h1 className={styles.title}>Create activity</h1>

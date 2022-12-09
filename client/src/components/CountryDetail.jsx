@@ -27,7 +27,7 @@ const CountryDetail = () => {
         <div className={styles.detailsContainer}>
             <div className={styles1.flex}>
             <Link to='/home'>
-                <button className={styles1.back}>Volver</button>
+                <button className={styles1.back}>Go back</button>
             </Link>
             </div>
            <img src={country.flags} alt={country.name} className={`${styles.col} ${styles.countryImage}`}/>

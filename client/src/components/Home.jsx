@@ -93,20 +93,20 @@ export default function Home(){
             <select onChange={(e)=> handleOrderPopulation(e)} className={styles1.select}>
                 {/*  cantidad de poblacion
                  */}
-               <option hidden value="all">Ordenar por poblacion</option>
-                    <option value="low">Descendente</option>
-                    <option value="high">high</option>
+               <option hidden value="all">Sort by population</option>
+                    <option value="low">Low</option>
+                    <option value="high">High</option>
             </select> 
             <select onChange={event => handleSort(event)} className={styles1.select}>
                 {/* ascendente y descendente por orden alfabetico 
                  */}
                 <option hidden value="all">Sort by name</option> 
-                <option value="asc">Ascendente</option>
-                <option value="desc">Descendente</option>
+                <option value="asc">A to Z </option>
+                <option value="desc">Z to A </option>
             </select>
             <select onChange={event => handleFilterContinent(event)} className={styles1.select}>
                 {/* filtrar por continente y por tipo de actividad turística */}
-                <option value="All">All</option>
+                <option value="All">All continents</option>
                 <option value="Africa">Africa</option>
                 <option value="North America">North America</option>
                 <option value="South America">South America</option>
@@ -117,7 +117,7 @@ export default function Home(){
             </select>
 
             <select onChange={event => handleFilterActivity(event)} className={styles1.select}>
-                <option value="All">All</option>
+                <option value="All">All activities</option>
                 { allActivities && allActivities.map(activity => (
                     <option value={activity.name} key={activity.id}>{activity.name}</option>
                 ))} 

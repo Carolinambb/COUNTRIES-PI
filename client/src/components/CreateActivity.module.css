@@ -9,15 +9,17 @@
 }
 
 .title{
-    padding: 20px;
+    padding: 17px;
     margin-top: 20px;
+    height: 20px;
   
 }
 
 .container{
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin: 17px;
+    
 }
 
 .input{
@@ -64,7 +66,7 @@
 
 .justify{
     background: white;
-    padding: 3em;
+    padding: 5em;
     height: 320px;
     border-radius: 20px;
     border-left: 1px solid white;

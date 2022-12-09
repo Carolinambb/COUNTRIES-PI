@@ -14,12 +14,25 @@
 - Afirmar y conectar los conceptos aprendidos en la carrera.
 - Aprender mejores prácticas.
 - Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
 
-## Horarios y Fechas
+#### Tecnologías usadas:
+- [ ] React
+- [ ] Redux
+- [ ] Express
+- [ ] Sequelize - Postgres
 
-El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
+## Enunciado
 
+La idea general es crear una aplicación en la cual se pueda ver información de  distintos paises utilizando la api externa [restcountries](https://restcountries.com/) y a partir de ella poder, entre otras cosas:
+
+- Buscar paises
+- Filtrarlos / Ordenarlos
+- Crear actividades turísticas
+
+<!-- ## Horarios y Fechas
+
+El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO). -->
+<!-- 
 ## Comenzando
 
  1. Forkear el repositorio para tener una copia del mismo en sus cuentas
@@ -38,55 +51,45 @@ Para verificar que versión tienen instalada:
 
 > node -v
 >
-> npm -v
+> npm -v -->
 
-## BoilerPlate
+## Levantar el proyecto
 
-El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas estará el código del back-end y el front-end respectivamente.
+- Clonar el repositorio
 
-En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
+- Hay una carpeta llamada `api` en donde hay que crear un archivo llamado: `.env` que tenga la siguiente forma:
 
-```
+
 DB_USER=usuariodepostgres
 DB_PASSWORD=passwordDePostgres
 DB_HOST=localhost
-```
 
-Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
+Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. 
 
-Adicionalmente será necesario que creen desde psql una base de datos llamada `countries`
+<!-- Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales). -->
 
-El contenido de `client` fue creado usando: Create React App.
+- Crear desde psql una base de datos llamada `countries`
 
-## Enunciado
+- En las dos carpetas: `api` y `client`, se debe realizar el comando npm install, y luego npm start.
 
-La idea general es crear una aplicación en la cual se pueda ver información de  distintos paises utilizando la api externa [restcountries](https://restcountries.com/) y a partir de ella poder, entre otras cosas:
+<!-- El contenido de `client` fue creado usando: Create React App. -->
 
-  - Buscar paises
-  - Filtrarlos / Ordenarlos
-  - Crear actividades turísticas
 
-__IMPORTANTE__: Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.
-
+<!-- 
 ### Únicos Endpoints/Flags que pueden utilizar
 
   - GET https://restcountries.com/v3/all
   - GET https://restcountries.com/v3/name/{name}
-  - GET https://restcountries.com/v3/alpha/{code}
+  - GET https://restcountries.com/v3/alpha/{code} -->
 
-### Requerimientos mínimos:
+<!-- ### Requerimientos mínimos:
 
 A continuación se detallaran los requerimientos mínimos para la aprobación del proyecto individial. Aquellos que deseen agregar más funcionalidades podrán hacerlo. En cuanto al diseño visual no va a haber wireframes ni prototipos prefijados sino que tendrán libertad de hacerlo a su gusto pero tienen que aplicar los conocimientos de estilos vistos en el curso para que quede agradable a la vista.
 
-__IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components)
+__IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components) -->
 
-#### Tecnologías necesarias:
-- [ ] React
-- [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
 
-#### Frontend
+<!-- #### Frontend
 
 Se debe desarrollar una aplicación de React/Redux que contenga las siguientes pantallas/rutas.
 
@@ -163,9 +166,5 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] __POST /activity__:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
   - Crea una actividad turística en la base de datos
+ -->
 
-
-#### Testing
-- [ ] Al menos tener un componente del frontend con sus tests respectivos
-- [ ] Al menos tener una ruta del backend con sus tests respectivos
-- [ ] Al menos tener un modelo de la base de datos con sus tests respectivos

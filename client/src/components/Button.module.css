@@ -73,8 +73,8 @@
 /*BOTON DEL DETAIL DE VOLVER*/
 
 .back {
-  right: 7rem;
-  top: -10px;
+ 
+  top: -70px;
   align-items: center;
   background-color: #fef3e3;
   border: 2px solid #111;
@@ -104,7 +104,7 @@
   content: "";
   display: block;
   height: 48px;
-  left: 0;
+  left: 5px;
   width: 100%;
   position: absolute;
   top: -2px;
@@ -254,6 +254,69 @@
 
 .back{
   left: 45rem;
+}
+
+
+
+/*BUTTON FORM GO BACK*/
+
+.back_form {
+  top: -10px;
+  align-items: center;
+  background-color: #fef3e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.back_form:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.back_form:hover:after {
+  transform: translate(0, 0);
+}
+
+.back_form:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.back_form:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .back_form {
+    padding: 0 40px;
+  }
 }
 
 /* CSS este es el cargar paises */
