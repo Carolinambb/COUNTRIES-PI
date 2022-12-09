@@ -170,7 +170,7 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
   - Crea una actividad turística en la base de datos
  -->
 
-<img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/ladingWelcome.png" alt="landing" width="40%" height="40%" > 
-<img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/countries.png" alt="countries" width="40%" height="40%"> 
-<img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/detailCountry.png" alt="detail" width="40%" height="40%"> 
-<img src="https://raw.githubusercontent.com/Carolinambb/Carolinambb/master/form.png" alt="form"  > 
+<img src="https://github.com/Carolinambb/COUNTRIES-PI/blob/main/landingWelcome.png" alt="landing" width="40%" height="40%" > 
+<img src="https://github.com/Carolinambb/COUNTRIES-PI/blob/main/countries.png" alt="countries" width="40%" height="40%"> 
+<img src="https://github.com/Carolinambb/COUNTRIES-PI/blob/main/detailCountry.png" alt="detail" width="40%" height="40%"> 
+<img src="https://github.com/Carolinambb/COUNTRIES-PI/blob/main/form.png" alt="form"  width="40%" height="40%" > 
