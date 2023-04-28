@@ -117,7 +117,7 @@ router.post('/activity', async (req,res) => {
         });
         res.status(200).send('La actividad se creo exitosamente')
     } catch(error) {    
-        res.status(500).send('No se pudo crear la actividad')
+        //res.status(500).send('No se pudo crear la actividad')
     }
 })
 

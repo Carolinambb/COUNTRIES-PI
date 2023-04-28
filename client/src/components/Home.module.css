@@ -12,7 +12,7 @@
     display: grid;
     grid-template-columns: repeat(3, 270px);
     gap: 120px;
-    padding: 40px;
+    padding: 140px;
     justify-content: center;
     
 }
